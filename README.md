@@ -1,6 +1,6 @@
 # Arquitectura TOY-8
 
-Nombre y apellido:
+Nombre y apellido:  Matias Ezequiel Di muro
 
 ## Instrucciones
 
@@ -28,13 +28,13 @@ Tienen un emulador de la computadora y el circuito para el Logisim en el [blog](
 0x8:  10100000    #  A0  #  lw 0
 0x9:  11100001    #  E1  #  bze 1
 0xA:  00000000    #  00  #  halt
-0xB:  00000011    #  03  #   3
-0xC:  00000110    #  06  #   6
-0xD:  11111111    #  FF  #   FF
-0xE:  00000000    #  00  #   0
+0xB:  00000011    #  03  #   
+0xC:  00000110    #  06  #   
+0xD:  11111111    #  FF  #  
+0xE:  00000000    #  00  #
 ```
 
-`` Cuando el programa se detiene, el valor de la direccion de memoria 0xE es 12 (00011100). --consultar-- ``
+`` Cuando el programa se detiene, el valor de la direccion de memoria 0xE es el producto de los numeros que se encuentren en las direcciones 0xB y 0xC ``
 
 2. Consideren el siguiente _hexdump_ de la memoria de TOY-8. O sea un volcado de la memoria en hexadecimal. ¿Cuántos programas distintos pueden encontrar? Indicar cuáles bytes interpretan como instrucciones y cuáles como datos.
 
@@ -63,17 +63,17 @@ Tienen un emulador de la computadora y el circuito para el Logisim en el [blog](
 4. El siguiente programa suma los números que encuentra en la entrada hasta que aparece un cero, y luego envía el resultado a la salida. Traducirlo a ensamblador y a C siguiendo el ejemplo de las primeras dos líneas.
 
 ```
-0x1:  A0   #  lw 0  #
-0x2:  CE   #  sw E  #  int sum = 0;
-0x3:  AF
-0x4:  E9
-0x5:  2E
-0x6:  CE
-0x7:  A0
-0x8:  E3
-0x9:  AE
-0xA:  CF
-0xB:  00
+0x1:  A0   #  lw  0  #  int r = dir_0 ;
+0x2:  CE   #  sw  E  #  int dir_e = r ;
+0x3:  AF   #  lw  F  #  r = dir_f ;
+0x4:  E9   #  bze 9  #  if (r == 0) r = dir_e ; ;
+0x5:  2E   #  add E  #  r = r + dir_e ; 
+0x6:  CE   #  sw  E  #  dir_e = r ; 
+0x7:  A0   #  lw  0  #  r = dir_0 ;
+0x8:  E3   #  bze 3  #  if (r == 0) r = dir_f ;
+0x9:  AE   #  lw  E  #  r = dir_e ;
+0xA:  CF   #  sw  F  #  dir_f = r ;  
+0xB:  00   #  halt   #  exit(-1) ;
 ```
 
 5. Una mejora que le podríamos hacer a esta computadora es duplicar la cantidad de memoria, pasar de 16 bytes a 32 bytes. ¿Cómo lo harían manteniendo la longitud de las instrucciones en 8 bits? ¿Qué partes de la CPU habría que modificar y cómo?
