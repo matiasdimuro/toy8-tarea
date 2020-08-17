@@ -66,7 +66,7 @@ Tienen un emulador de la computadora y el circuito para el Logisim en el [blog](
 0x1:  A0   #  lw  0  #  int r = dir_0 ;
 0x2:  CE   #  sw  E  #  int dir_e = r ;
 0x3:  AF   #  lw  F  #  r = dir_f ;
-0x4:  E9   #  bze 9  #  if (r == 0) r = dir_e ; ;
+0x4:  E9   #  bze 9  #  if (r == 0) r = dir_e ; 
 0x5:  2E   #  add E  #  r = r + dir_e ; 
 0x6:  CE   #  sw  E  #  dir_e = r ; 
 0x7:  A0   #  lw  0  #  r = dir_0 ;
